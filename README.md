@@ -9,12 +9,17 @@ Python: A versatile programming language used for scientific computing and signa
 
 ## Program
 ```
+# Impulse Sampling
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import resample
-fs = 100
-t = np.arange(0, 1, 1/fs) 
-f = 5
+
+# Define parameters
+fs = 100  # Sampling frequency
+f = 5  # Signal frequency
+t = np.arange(0, 1, 1/fs)  # Time vector
+
+# Generate continuous signal
 signal = np.sin(2 * np.pi * f * t)
 plt.figure(figsize=(10, 4))
 plt.plot(t, signal, label='Continuous Signal')
@@ -24,19 +29,23 @@ plt.ylabel('Amplitude')
 plt.grid(True)
 plt.legend()
 plt.show()
-t_sampled = np.arange(0, 1, 1/fs)
-signal_sampled = np.sin(2 * np.pi * f * t_sampled)
+
+# Perform sampling
+signal_sampled = np.sin(2 * np.pi * f * t)
 plt.figure(figsize=(10, 4))
 plt.plot(t, signal, label='Continuous Signal', alpha=0.7)
-plt.stem(t_sampled, signal_sampled, linefmt='r-', markerfmt='ro', basefmt='r-', label='Sampled Signal (fs = 100 Hz)')
+plt.stem(t, signal_sampled, linefmt='r-', markerfmt='ro', basefmt='r-', label='Sampled Signal (fs = 100 Hz)')
 plt.title('Sampling of Continuous Signal (fs = 100 Hz)')
 plt.xlabel('Time [s]')
 plt.ylabel('Amplitude')
 plt.grid(True)
 plt.legend()
 plt.show()
+
+# Reconstruction of signal
 reconstructed_signal = resample(signal_sampled, len(t))
 plt.figure(figsize=(10, 4))
+plt.plot(t, signal, label='Continuous Signal', alpha=0.7)
 plt.plot(t, reconstructed_signal, 'r--', label='Reconstructed Signal (fs = 100 Hz)')
 plt.title('Reconstruction of Sampled Signal (fs = 100 Hz)')
 plt.xlabel('Time [s]')
@@ -47,7 +56,8 @@ plt.show()
 
 ```
 ## Output Waveform
-![download](https://github.com/user-attachments/assets/0ee61b0a-7e9a-4ba9-bcf3-2eb35a265594)
+![Screenshot 2025-05-20 194416](https://github.com/user-attachments/assets/606084a3-f0c7-4819-b75f-3fdc1bcb240e)
+
 
 
 ## Result
